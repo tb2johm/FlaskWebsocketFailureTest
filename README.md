@@ -1,7 +1,8 @@
 # FlaskWebsocketFailureTest
 
 This small project is made to highlight a possible bugg in the Flask-SocketIO
-Alternatively it will show where I'm doing it wrong...
+
+Alternatively it might help to show me where I'm something it wrong...
 
 ## Error description
 
