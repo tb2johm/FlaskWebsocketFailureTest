@@ -14,7 +14,7 @@
     var initial_request_sent = false;
 
     $(document).ready(function(){
-        socket = io.connect('https://localhost/sio');
+        socket = io.connect('localhost:' + location.port + '/sio');
 
         socket.on('connect', function(){
             send_initial_request();

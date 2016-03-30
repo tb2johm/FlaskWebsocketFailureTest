@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask.ext.socketio import SocketIO
 from main_page import main_pages
 import eventlet
@@ -27,7 +27,7 @@ def sio_connect():
 @sio.on('request', namespace='/sio')
 def sio_request(message):
     print("#### request:", message)
-    sio.emit('response', message, namespace="/sio")
+    sio.emit('response', message, room=request.sid, namespace="/sio")
     print("#### response sent")
 
 if __name__ == "__main__":
