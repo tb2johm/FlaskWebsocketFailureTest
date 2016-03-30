@@ -27,6 +27,7 @@ def sio_connect():
 @sio.on('request', namespace='/sio')
 def sio_request(message):
     print("#### request:", message)
+    sio.emit('pong', "null")
     sio.emit('response', message, room=request.sid, namespace="/sio")
     print("#### response sent")
 
