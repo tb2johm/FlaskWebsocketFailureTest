@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var socket;
+    var initial_request_sent = false;
+
+    $(document).ready(function(){
+        socket = io.connect('https://localhost/sio');
+
+        socket.on('connect', function(){
+            send_initial_request();
+        });
+
+        socket.on('response', function(data){
+            $("input#status").val(data);
+            console.log("Received: ", data);
+        });
+
+        socket.on('connect_error', function() {
+            console.log("I am getting a error");
+        });
+
+        socket.on('update', function(data) {
+            console.log("UPDATE");
+            console.log(data);
+        });
+
+        $("button#secondRequest").click(function(){
+            socket.emit('request', 'second request ok!');
+            console.log("second request sent");
+        });
+    });
+
+    function send_initial_request(){
+        if (!initial_request_sent){
+            socket.emit('request', 'init ok');
+            initial_request_sent = true;
+        }
+    }
+</script>
+
+Hello World
+<br>
+<input id="status">
+<br>
+<button type="button" id="secondRequest">Send second request</button>
+
+</body>
+</html>

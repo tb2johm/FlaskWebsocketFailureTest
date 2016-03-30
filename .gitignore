@@ -1,0 +1,7 @@
+.svn/
+/venv
+*.pyc
+.idea
+.cache
+_output
+
